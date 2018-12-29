@@ -1,0 +1,17 @@
+{
+  "name": "@cliffpyles/files",
+  "version": "1.0.0",
+  "description": "A utilility for simplifying basic file operations",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "Cliff Pyles <cliffpyles@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^23.6.0",
+    "jest-extended": "^0.11.0"
+  }
+}
