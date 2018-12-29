@@ -13,5 +13,8 @@
   "dependencies": {
     "jest": "^23.6.0",
     "jest-extended": "^0.11.0"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "jest-extended"
   }
 }

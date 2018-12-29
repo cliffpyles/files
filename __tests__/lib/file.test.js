@@ -55,9 +55,24 @@ test('can move/rename a file', async () => {
   expect(fileWasFound).toBe(true)
 })
 
-// test('can find a value in files', async () => {
-//   expect(false).toBe(true)
-// })
+test('can search for a value in a file', async () => {
+  await File.create(
+    'tmp/file-to-search.txt',
+    `
+    line 1: example 1
+    line 2: example 2
+    line 3: example 3
+    line 4: not a match 1
+    line 5: not a match 2
+  `
+  )
+  const results = await File.search('tmp/file-to-search.txt', 'example')
+
+  expect(results).toBeArrayOfSize(3)
+  expect(results[0].lineNumber).toBe(1)
+  expect(results[1].lineNumber).toBe(2)
+  expect(results[2].lineNumber).toBe(3)
+})
 
 // test('can find and replace a value in files', async () => {
 //   expect(false).toBe(true)
