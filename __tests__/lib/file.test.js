@@ -32,13 +32,19 @@ test('can update the contents of a file', async () => {
     return file.content.replace('original', 'updated')
   })
   const updatedFileOnDisk = await File.open('tmp/file-to-update.txt')
+
   expect(updatedFile.content).toBe('updated content')
   expect(updatedFileOnDisk.content).toBe('updated content')
 })
 
-// test('can delete files', async () => {
-//   expect(false).toBe(true)
-// })
+test('can delete files', async () => {
+  await File.create('tmp/file-to-delete.txt')
+  await File.delete('tmp/file-to-delete.txt')
+
+  expect(() => {
+    fs.statSync('tmp/file-to-delete.txt')
+  }).toThrow()
+})
 
 // test('can rename a file', async () => {
 //   expect(false).toBe(true)
