@@ -9,6 +9,7 @@ test('can create files', async () => {
   expect(fileWasFound).toBe(true)
   expect(file.filepath).toContain('tmp/new-file.txt')
 })
+
 test('can create a file with content', async () => {
   const file = await File.create('tmp/new-file-with-content.txt', 'Hello!')
 
@@ -46,9 +47,13 @@ test('can delete files', async () => {
   }).toThrow()
 })
 
-// test('can rename a file', async () => {
-//   expect(false).toBe(true)
-// })
+test('can move/rename a file', async () => {
+  await File.create('tmp/file-to-rename.txt')
+  await File.rename('tmp/file-to-rename.txt', 'tmp/file-to-rename-new.txt')
+  const fileWasFound = fs.statSync('tmp/file-to-rename-new.txt').isFile()
+
+  expect(fileWasFound).toBe(true)
+})
 
 // test('can find a value in files', async () => {
 //   expect(false).toBe(true)
