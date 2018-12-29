@@ -26,9 +26,15 @@ test('can open a file', async () => {
   expect(file.content).toBe('has some content')
 })
 
-// test('can update the contents of a file', async () => {
-//   expect(false).toBe(true)
-// })
+test('can update the contents of a file', async () => {
+  await File.create('tmp/file-to-update.txt', 'original content')
+  const updatedFile = await File.update('tmp/file-to-update.txt', file => {
+    return file.content.replace('original', 'updated')
+  })
+  const updatedFileOnDisk = await File.open('tmp/file-to-update.txt')
+  expect(updatedFile.content).toBe('updated content')
+  expect(updatedFileOnDisk.content).toBe('updated content')
+})
 
 // test('can delete files', async () => {
 //   expect(false).toBe(true)
