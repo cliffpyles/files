@@ -74,9 +74,25 @@ test('can search for a value in a file', async () => {
   expect(results[2].lineNumber).toBe(3)
 })
 
-// test('can find and replace a value in files', async () => {
-//   expect(false).toBe(true)
-// })
+test('can find and replace a value in files', async () => {
+  const file = await File.create(
+    'tmp/file-to-replace.txt',
+    `
+    example-1
+    example-2
+    example-3
+  `
+  )
+  const updatedFile = await File.replace(
+    'tmp/file-to-replace.txt',
+    'example',
+    'demo'
+  )
+
+  expect(updatedFile.content).toContain('demo-1')
+  expect(updatedFile.content).toContain('demo-2')
+  expect(updatedFile.content).toContain('demo-3')
+})
 
 // test('can duplicate files', async () => {
 //   expect(false).toBe(true)
