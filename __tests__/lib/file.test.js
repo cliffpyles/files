@@ -105,5 +105,3 @@ test('can backup/duplicate files', async () => {
   expect(duplicatedFile.filepath).toContain('.txt')
   expect(duplicatedFileOnDisk).toContain('contents of file')
 })
-
-// afterEach(() => {})
