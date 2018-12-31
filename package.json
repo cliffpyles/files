@@ -8,6 +8,7 @@
     "test-watch": "jest --watch"
   },
   "keywords": [],
+  "repository": "cliffpyles/files",
   "author": "Cliff Pyles <cliffpyles@gmail.com>",
   "license": "MIT",
   "dependencies": {

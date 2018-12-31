@@ -105,3 +105,15 @@ test('can backup/duplicate files', async () => {
   expect(duplicatedFile.filepath).toContain('.txt')
   expect(duplicatedFileOnDisk).toContain('contents of file')
 })
+
+test('can append content to a file', async () => {
+  const file = await File.create('tmp/file-with-append.txt', 'content for file')
+  const updatedFile = await File.append(
+    'tmp/file-with-append.txt',
+    'more content'
+  )
+  const updatedFileOnDisk = await File.open('tmp/file-with-append.txt')
+
+  expect(updatedFileOnDisk.content).toContain('content for file')
+  expect(updatedFileOnDisk.content).toContain('more content')
+})
