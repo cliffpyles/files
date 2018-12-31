@@ -94,12 +94,16 @@ test('can find and replace a value in files', async () => {
   expect(updatedFile.content).toContain('demo-3')
 })
 
-// test('can duplicate files', async () => {
-//   expect(false).toBe(true)
-// })
-
-// test('can move a file', async () => {
-//   expect(false).toBe(true)
-// })
+test('can backup/duplicate files', async () => {
+  const file = await File.create(
+    'tmp/file-to-duplicate.txt',
+    'contents of file'
+  )
+  const duplicatedFile = await File.duplicate('tmp/file-to-duplicate.txt')
+  const duplicatedFileOnDisk = fs.readFileSync(duplicatedFile.filepath, 'utf8')
+  expect(duplicatedFile.filepath).toContain('file-to-duplicate')
+  expect(duplicatedFile.filepath).toContain('.txt')
+  expect(duplicatedFileOnDisk).toContain('contents of file')
+})
 
 // afterEach(() => {})
