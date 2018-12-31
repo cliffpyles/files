@@ -17,9 +17,18 @@ test('can delete directory', async () => {
   }).toThrow()
 })
 
-// test('can move/rename directory', async () => {
-//   expect(true).toBe(false)
-// })
+test('can move/rename directory', async () => {
+  await Directory.create('tmp/directory-to-rename')
+  await Directory.rename(
+    'tmp/directory-to-rename',
+    'tmp/directory-to-rename-new'
+  )
+  const directoryWasFound = fs
+    .statSync('tmp/directory-to-rename-new')
+    .isDirectory()
+
+  expect(directoryWasFound).toBe(true)
+})
 
 // test('can search directory for files', async () => {
 //   expect(true).toBe(false)
