@@ -117,3 +117,18 @@ test('can append content to a file', async () => {
   expect(updatedFileOnDisk.content).toContain('content for file')
   expect(updatedFileOnDisk.content).toContain('more content')
 })
+
+test('can prepend content to a file', async () => {
+  const file = await File.create(
+    'tmp/file-with-prepend.txt',
+    'content for file'
+  )
+  const updatedFile = await File.prepend(
+    'tmp/file-with-prepend.txt',
+    'more content'
+  )
+  const updatedFileOnDisk = await File.open('tmp/file-with-prepend.txt')
+
+  expect(updatedFileOnDisk.content).toEndWith('content for file')
+  expect(updatedFileOnDisk.content).toStartWith('more content')
+})
