@@ -9,9 +9,13 @@ test('can create directory', async () => {
   expect(directoryWasFound).toBe(true)
   expect(directory.path).toContain('tmp/new-directory')
 })
-// test('can delete directory', async () => {
-//   expect(true).toBe(false)
-// })
+test('can delete directory', async () => {
+  const directory = await Directory.create('tmp/new-directory-to-delete')
+  await Directory.delete('tmp/new-directory-to-delete')
+  expect(() => {
+    fs.statSync('tmp/new-directory-to-delete')
+  }).toThrow()
+})
 
 // test('can move/rename directory', async () => {
 //   expect(true).toBe(false)
