@@ -30,7 +30,17 @@ test('can move/rename directory', async () => {
   expect(directoryWasFound).toBe(true)
 })
 
+test('can create parent directories if needed', async () => {
+  await Directory.create('tmp/level1/level2/level3/level4')
+  const directoryWasFound = fs
+    .statSync('tmp/level1/level2/level3/level4')
+    .isDirectory()
+
+  expect(directoryWasFound).toBe(true)
+})
+
 // test('can search directory for files', async () => {
+//   await Directory.create('tmp/directory-to-search/item1')
 //   expect(true).toBe(false)
 // })
 

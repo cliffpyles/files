@@ -19,6 +19,21 @@ test('can create a file with content', async () => {
   expect(file.content).toBe('Hello!')
 })
 
+test('can create parents when needed', async () => {
+  const file = await File.create(
+    'tmp/non-existent/new-file-with-content.txt',
+    'Hello!'
+  )
+
+  const fileOnDisk = fs.readFileSync(
+    'tmp/non-existent/new-file-with-content.txt',
+    'utf8'
+  )
+
+  expect(fileOnDisk).toBe('Hello!')
+  expect(file.content).toBe('Hello!')
+})
+
 test('can open a file', async () => {
   await File.create('tmp/file-to-open.txt', 'has some content')
   const file = await File.open('tmp/file-to-open.txt')
